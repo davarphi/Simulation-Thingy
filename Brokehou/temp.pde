@@ -103,7 +103,7 @@ void keyReleased() {
   }
 }
 boolean isPlayerIntersect(Player p, Enemy e){
-  return true;
+  return false;
 }
 boolean isProjIntersect(Projectile p, Enemy e){
   float e_left = e.pos.x - e.w/2;

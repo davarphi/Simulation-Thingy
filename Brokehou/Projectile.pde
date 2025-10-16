@@ -23,9 +23,8 @@ class Projectile {
   void fire(float newX, float newY, int flag) {
     if (SLOW) {
       attackDeg = radians(2);
-      println("Firing focus...");
     } else {
-      attackDeg = radians(5);
+      attackDeg = radians(4);
     }
     
     pos.set(newX, newY);
