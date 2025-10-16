@@ -35,8 +35,10 @@ void draw() {
   background(128);
   if (SHOOT) {
     if (firingTimer.complete()) {
-      projs[nextProjectile].fire(p.pos.x, p.pos.y);
-      nextProjectile = (nextProjectile + 1) % projs.length;
+      for (int i = 0; i < 3; i++) {  
+        projs[nextProjectile + i].fire(p.pos.x, p.pos.y, i);
+      }
+      nextProjectile = (nextProjectile + 3) % projs.length;
       firingTimer.start();
     }
   }
@@ -104,16 +106,16 @@ boolean isPlayerIntersect(Player p, Enemy e){
   return true;
 }
 boolean isProjIntersect(Projectile p, Enemy e){
-  float e_left = e.x - e.w/2;
-  float e_right = e.x + e.w/2;
-  float e_up = e.y - e.h/2;
-  float e_down = e.y + e.h/2;
+  float e_left = e.pos.x - e.w/2;
+  float e_right = e.pos.x + e.w/2;
+  float e_up = e.pos.y - e.h/2;
+  float e_down = e.pos.y + e.h/2;
   
-  float closest_x = max(e_left, min(p.x, e_right));
-  float closest_y = max(e_up, min(p.y, e_down));
+  float closest_x = max(e_left, min(p.pos.x, e_right));
+  float closest_y = max(e_up, min(p.pos.y, e_down));
   
-  float distance_x = p.x - closest_x;
-  float distance_y = p.y - closest_y;
+  float distance_x = p.pos.x - closest_x;
+  float distance_y = p.pos.y - closest_y;
   
   double distance_squared = Math.pow(distance_x, 2) + Math.pow(distance_y, 2);
   

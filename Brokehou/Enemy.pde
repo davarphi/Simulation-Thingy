@@ -1,22 +1,20 @@
 class Enemy {
-  float x, y, w, h;
-  float vx, vy;
+  PVector pos, vel;
+  float w, h;
   float health = 100;
   
   
   Enemy() {
-    x = width/2;
-    y = 40;
+    pos = new PVector(width/2, 40);
     
     w = 16;
     h = 32;
-    vx = 0;
-    vy = 0;
+    vel = new PVector(0,0);
   }
   void display() {
     fill(255, 255, 0);
     rectMode(CENTER);
-    rect(x, y, w, h);
+    rect(pos.x, pos.y, w, h);
   }
  
  void takeDamage() {
