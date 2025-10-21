@@ -1,5 +1,6 @@
 import pygame
 import pygame.math as PG 
+from components.player import Player
 
 pygame.init()
 
@@ -10,10 +11,8 @@ CLOCK = pygame.time.Clock()
 running = True
 
 BASE_SPEED = 4
+player = Player(WINDOW.get_width()/2, WINDOW.get_height()/2)
 player_input = {"left":False, "right":False, "up":False, "down":False, "slow":False}
-player_pos = PG.Vector2(WINDOW.get_width()/2, WINDOW.get_height()/2)
-player_velocity_dir = PG.Vector2(0, 0)
-slow = False
 
 def check_input(key, value):
     if key == pygame.K_LEFT:
@@ -39,16 +38,8 @@ while running:
         elif event.type == pygame.KEYUP:
             check_input(event.key, False)
 
-    player_velocity_dir.x = player_input["right"] - player_input["left"]
-    player_velocity_dir.y = player_input["down"] - player_input["up"]
-
-    pygame.draw.rect(WINDOW, (128, 0, 0), (player_pos.x, player_pos.y, 8, 8))
-
-    speed = BASE_SPEED if not(player_input["slow"]) else BASE_SPEED/2
-
-    if player_velocity_dir != PG.Vector2(0,0):
-        player_pos += PG.Vector2.normalize(player_velocity_dir)*speed
-
+    player.update_pos(player_input)
+    player.display(WINDOW)
     pygame.display.update()
 
 pygame.quit()
