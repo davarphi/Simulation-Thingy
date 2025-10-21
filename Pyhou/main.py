@@ -9,10 +9,11 @@ pygame.display.set_caption("Pyhou")
 CLOCK = pygame.time.Clock()
 running = True
 
-speed = 3
-player_input = {"left":False, "right":False, "up":False, "down":False}
+BASE_SPEED = 4
+player_input = {"left":False, "right":False, "up":False, "down":False, "slow":False}
 player_pos = PG.Vector2(WINDOW.get_width()/2, WINDOW.get_height()/2)
 player_velocity_dir = PG.Vector2(0, 0)
+slow = False
 
 def check_input(key, value):
     if key == pygame.K_LEFT:
@@ -23,6 +24,8 @@ def check_input(key, value):
         player_input["down"] = value
     elif key == pygame.K_RIGHT:
         player_input["right"] = value
+    elif key == pygame.K_LSHIFT:
+        player_input["slow"] = value
     
 while running:
     WINDOW.fill((128, 128, 128))
@@ -40,6 +43,8 @@ while running:
     player_velocity_dir.y = player_input["down"] - player_input["up"]
 
     pygame.draw.rect(WINDOW, (128, 0, 0), (player_pos.x, player_pos.y, 8, 8))
+
+    speed = BASE_SPEED if not(player_input["slow"]) else BASE_SPEED/2
 
     if player_velocity_dir != PG.Vector2(0,0):
         player_pos += PG.Vector2.normalize(player_velocity_dir)*speed
