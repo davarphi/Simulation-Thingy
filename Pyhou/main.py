@@ -1,5 +1,5 @@
 import pygame
-import sys
+import pygame.math as PG 
 
 pygame.init()
 
@@ -9,11 +9,10 @@ pygame.display.set_caption("Pyhou")
 CLOCK = pygame.time.Clock()
 running = True
 
-player_x = WINDOW.get_width()/2
-player_y = WINDOW.get_height()/2
-speed = 2
+speed = 3
 player_input = {"left":False, "right":False, "up":False, "down":False}
-player_velocity = [0, 0]
+player_pos = PG.Vector2(WINDOW.get_width()/2, WINDOW.get_height()/2)
+player_velocity_dir = PG.Vector2(0, 0)
 
 def check_input(key, value):
     if key == pygame.K_LEFT:
@@ -37,14 +36,13 @@ while running:
         elif event.type == pygame.KEYUP:
             check_input(event.key, False)
 
-    player_velocity[0] = player_input["right"] - player_input["left"]
-    player_velocity[1] = player_input["down"] - player_input["up"]
+    player_velocity_dir.x = player_input["right"] - player_input["left"]
+    player_velocity_dir.y = player_input["down"] - player_input["up"]
 
+    pygame.draw.rect(WINDOW, (128, 0, 0), (player_pos.x, player_pos.y, 8, 8))
 
-    pygame.draw.rect(WINDOW, (128, 0, 0), (player_x, player_y, 8, 8))
-
-    player_x += player_velocity[0]*speed
-    player_y += player_velocity[1]*speed
+    if player_velocity_dir != PG.Vector2(0,0):
+        player_pos += PG.Vector2.normalize(player_velocity_dir)*speed
 
     pygame.display.update()
 
