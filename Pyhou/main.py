@@ -1,6 +1,7 @@
 import pygame
 import pygame.math as PG 
 from components.player import Player
+from components.projectile import Projectile
 
 pygame.init()
 
@@ -10,8 +11,8 @@ pygame.display.set_caption("Pyhou")
 CLOCK = pygame.time.Clock()
 running = True
 
-BASE_SPEED = 4
-player = Player(WINDOW.get_width()/2, WINDOW.get_height()/2, (WINDOW.get_width(), WINDOW.get_height()))
+Player.set_bound(WINDOW)
+player = Player(WINDOW.get_width()/2, WINDOW.get_height()/2)
 player_input = {"left":False, "right":False, "up":False, "down":False, "slow":False}
 
 def check_input(key, value):
