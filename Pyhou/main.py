@@ -11,7 +11,7 @@ CLOCK = pygame.time.Clock()
 running = True
 
 BASE_SPEED = 4
-player = Player(WINDOW.get_width()/2, WINDOW.get_height()/2)
+player = Player(WINDOW.get_width()/2, WINDOW.get_height()/2, (WINDOW.get_width(), WINDOW.get_height()))
 player_input = {"left":False, "right":False, "up":False, "down":False, "slow":False}
 
 def check_input(key, value):
