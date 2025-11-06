@@ -44,7 +44,7 @@ while running:
             
     if (player_input["shoot"]):
         player.shoot(player_input)
-        
+
     player.update_pos(player_input)
     player.update_proj()
     player.draw(WINDOW)

@@ -21,6 +21,8 @@ class Player:
         #self.h = 8
         self.r = 7
         self.bullets = []
+        self.cooldown_time = 5
+        self.shot_cooldown = 0 
 
     def update_pos(self, player_input):
         self.vel.x = player_input["right"] - player_input["left"]
@@ -52,15 +54,20 @@ class Player:
 
     def shoot(self, player_state):
         if (player_state["slow"]):
-            attack_degs = [-radians(4), 0, radians(4)]
-        else:
             attack_degs = [-radians(2), 0, radians(2)]
+        else:
+            attack_degs = [-radians(5), 0, radians(5)]
+        
+        if self.shot_cooldown == 0:
+            for angle in attack_degs:
+                bullet = Projectile(self.pos.x, self.pos.y + self.r // 2, angle)
+                self.bullets.append(bullet)
 
-        for angle in attack_degs:
-            bullet = Projectile(self.pos.x, self.pos.y + self.r // 2, angle)
-            self.bullets.append(bullet)
+            self.shot_cooldown = self.cooldown_time
 
     def update_proj(self):
+        if self.shot_cooldown > 0:
+            self.shot_cooldown -= 1
         for bullet in self.bullets[:]:
             bullet.update()
             if bullet.is_out_bound():
