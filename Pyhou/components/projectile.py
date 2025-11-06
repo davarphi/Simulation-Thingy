@@ -12,11 +12,11 @@ class Projectile:
         cls.bound_h = window.get_height()
 
     def __init__(self, pos_x, pos_y, angle_off):
-        start = Vector2(pos_x, pos_x)
-        pos = Vector2(pos_x, pos_y)
-        speed = 10
-        vel = Vector2(cos(pi/2 + angle_off), sin(pi/2 + angle_off))*speed
-        r = 5
+        self.start = Vector2(pos_x, pos_y)
+        self.pos = Vector2(pos_x, pos_y)
+        self.speed = 10
+        self.vel = Vector2(cos(pi/2 + angle_off), -sin(pi/2 + angle_off))*self.speed
+        self.r = 5
 
     def update(self):
         self.pos += self.vel

@@ -40,8 +40,13 @@ while running:
         elif event.type == pygame.KEYDOWN:
             check_input(event.key, True)
         elif event.type == pygame.KEYUP:
-            check_input(event.key, False)
+            check_input(event.key, False)\
             
+    if (player_input["shoot"]):
+        player.shoot(player_input)
+        
+    player.update_pos(player_input)
+    player.update_proj()
     player.draw(WINDOW)
     pygame.display.update()
 
