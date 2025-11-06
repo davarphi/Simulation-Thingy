@@ -1,5 +1,7 @@
 import pygame
 from pygame.math import Vector2
+from math import radians
+from projectile import Projectile
 
 class Player:
     bound_w = None
@@ -11,13 +13,14 @@ class Player:
         cls.bound_h = window.get_height()
     
     def __init__(self, pos_x, pos_y):
-        self.BASE_SPEED = 3
+        self.BASE_SPEED = 5
 
         self.pos = Vector2(pos_x, pos_y)
         self.vel = Vector2(0,0)
         #self.w = 8
         #self.h = 8
-        self.r = 10
+        self.r = 7
+        self.bullets = []
 
     def update_pos(self, player_input):
         self.vel.x = player_input["right"] - player_input["left"]
@@ -42,6 +45,20 @@ class Player:
     def display(self, window):
         pygame.draw.circle(window, (128, 0, 0), (self.pos.x, self.pos.y), self.r)
         pygame.draw.circle(window, (0, 0, 0), (self.pos.x, self.pos.y), self.r, 1)
+    
+    def update_proj(self, bullets):
+        pass
+
+    def shoot(self, player_state):
+        if (player_state["slow"]):
+            attack_degs = [-radians(4), 0, radians(4)]
+        else:
+            attack_degs = [-radians(2), 0, radians(2)]
+
+        for angle in attack_degs:
+            bullet = Projectile 
+
+
 
 
 

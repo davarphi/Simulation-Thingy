@@ -12,8 +12,9 @@ CLOCK = pygame.time.Clock()
 running = True
 
 Player.set_bound(WINDOW)
+Projectile.set_bound(WINDOW)
 player = Player(WINDOW.get_width()/2, WINDOW.get_height()/2)
-player_input = {"left":False, "right":False, "up":False, "down":False, "slow":False}
+player_input = {"left":False, "right":False, "up":False, "down":False, "slow":False, "shoot":False}
 
 def check_input(key, value):
     if key == pygame.K_LEFT:
@@ -26,6 +27,8 @@ def check_input(key, value):
         player_input["right"] = value
     elif key == pygame.K_LSHIFT:
         player_input["slow"] = value
+    elif key == pygame.K_z:
+        player_input["shoot"] = value
     
 while running:
     WINDOW.fill((128, 128, 128))
@@ -40,6 +43,7 @@ while running:
             check_input(event.key, False)
 
     player.update_pos(player_input)
+    player.update_proj(player_input)
     player.display(WINDOW)
     pygame.display.update()
 
