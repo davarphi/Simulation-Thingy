@@ -56,7 +56,7 @@ class Player:
             attack_degs = [-radians(2), 0, radians(2)]
 
         for angle in attack_degs:
-            bullet = Projectile 
+            bullet = Projectile(self.pos.x, self.pos.y + self.r // 2, angle)
 
 
 
