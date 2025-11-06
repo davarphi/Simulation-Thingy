@@ -1,6 +1,7 @@
 import pygame
-import pygame.math as PG 
+import pygame.math
 from components.player import Player
+from components.enemy import Enemy
 from components.projectile import Projectile
 
 pygame.init()
@@ -14,6 +15,7 @@ running = True
 Player.set_bound(WINDOW)
 Projectile.set_bound(WINDOW)
 player = Player(WINDOW.get_width()/2, WINDOW.get_height()/2)
+enemy = Enemy(WINDOW.get_width()/2, 40)
 player_input = {"left":False, "right":False, "up":False, "down":False, "slow":False, "shoot":False}
 
 def check_input(key, value):
@@ -29,7 +31,17 @@ def check_input(key, value):
         player_input["slow"] = value
     elif key == pygame.K_z:
         player_input["shoot"] = value
-    
+
+def check_enemy_collisions():
+    for bullet in player.bullets[:]:
+        if is_bullet_hit_enemy(bullet):
+            bullet.is_remove = True
+            enemy.health -= 2
+
+def is_bullet_hit_enemy(bullet):
+    distance = bullet.pos.distance_to(enemy.pos)
+    return (distance < bullet.r + enemy.r)
+
 while running:
     WINDOW.fill((128, 128, 128))
 
@@ -47,7 +59,9 @@ while running:
 
     player.update_pos(player_input)
     player.update_proj()
+    check_enemy_collisions() #careful bout placement
     player.draw(WINDOW)
+    enemy.draw(WINDOW)
     pygame.display.update()
 
 pygame.quit()

@@ -17,6 +17,7 @@ class Projectile:
         self.speed = 10
         self.vel = Vector2(cos(pi/2 + angle_off), -sin(pi/2 + angle_off))*self.speed
         self.r = 5
+        self.is_remove = False
 
     def update(self):
         self.pos += self.vel

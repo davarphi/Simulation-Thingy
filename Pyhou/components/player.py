@@ -71,7 +71,11 @@ class Player:
         for bullet in self.bullets[:]:
             bullet.update()
             if bullet.is_out_bound():
+                bullet.is_remove = True
+                
+            if bullet.is_remove:
                 self.bullets.remove(bullet)
+
             
 
 
