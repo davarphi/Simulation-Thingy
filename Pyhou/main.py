@@ -41,10 +41,8 @@ while running:
             check_input(event.key, True)
         elif event.type == pygame.KEYUP:
             check_input(event.key, False)
-
-    player.update_pos(player_input)
-    player.update_proj(player_input)
-    player.display(WINDOW)
+            
+    player.draw(WINDOW)
     pygame.display.update()
 
 pygame.quit()

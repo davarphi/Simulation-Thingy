@@ -1,6 +1,6 @@
 import pygame
 from pygame.math import Vector2
-from math import sin, cos, pi, radians
+from math import sin, cos, pi
 
 class Projectile:
     bound_w = None
@@ -15,18 +15,13 @@ class Projectile:
         start = Vector2(pos_x, pos_x)
         pos = Vector2(pos_x, pos_y)
         speed = 10
-        vel = Vector2(cos(pi/2 + angle_off)*speed, sin(pi/2 + angle_off)*speed)
-
-
+        vel = Vector2(cos(pi/2 + angle_off), sin(pi/2 + angle_off))*speed
         r = 5
-        vel = Vector2(0, 0)
-        in_motion = False
-        attack_deg = None
 
     def update(self):
         self.pos += self.vel
     
-    def update(self, window):
+    def draw(self, window):
         pygame.draw.circle(window, (128, 0, 0, 50), (self.pos.x, self.pos.y), self.r)
         pygame.draw.circle(window, (0, 0, 0, 50), (self.pos.x, self.pos.y), self.r, 1)
 
@@ -51,7 +46,7 @@ class Projectile:
     #         self.in_motion = True
     
 
-    def check_bound(self):
+    def is_out_bound(self):
         return self.pos.y < self.r/2 or self.pos.y > self.bound_h - self.r/2
     
 
