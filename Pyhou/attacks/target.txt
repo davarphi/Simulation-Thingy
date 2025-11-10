@@ -5,9 +5,3 @@ fan_aim
 
 Later (with priority):
 moveto (with duration?)
-fan_basic
-circle_hit_basic
-circle_hit_aim
-circle_miss_basic
-circle_miss_aim
-
