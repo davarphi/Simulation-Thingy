@@ -2,7 +2,7 @@
     "simple_fan": {
         "loop": true,
         "steps": [
-            {"type": "shoot", "pattern": "fan_aim", "cnt1":8, "cnt2":3, "ang1": 0, "ang2": 5, "spe1": 6, "spe2": 2},
+            {"type": "shoot", "pattern": "fan_aim", "cnt1":8, "cnt2":1, "ang1": 0, "ang2": 5, "spe1": 10, "spe2": 4},
             {"type": "wait", "duration": 120}
         ]
     }

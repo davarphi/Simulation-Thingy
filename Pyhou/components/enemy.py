@@ -31,7 +31,7 @@ class Enemy:
 
     def shoot(self, step, player_pos):
         pattern_name = step.get("pattern")
-        valid_name = ["fan_aim"]
+        valid_name = ["fan_aim", "fan_no_aim"]
         if pattern_name in valid_name:
             new_projectiles = self.get_projectile(pattern_name, step, player_pos)
         
@@ -44,15 +44,16 @@ class Enemy:
         ang1 = step.get("ang1")
         ang2 = step.get("ang2")
         spe1 = step.get("spe1")
-        spe2 = step.get("ang2")
+        spe2 = step.get("spe2")
         player_angle_rad = atan2(-(player_pos.y - self.pos.y), player_pos.x - self.pos.x)
         player_angle = degrees(player_angle_rad)
 
         match pattern_name:
             case "fan_aim":
-                new_projectile = get_fan_aim_pattern_bullets(cnt1, cnt2, ang1, ang2, spe1, spe2, self.pos, player_angle)
+                new_projectile = get_fan_pattern_bullets(cnt1, cnt2, ang1, ang2, spe1, spe2, self.pos, player_angle)
+            case "fan_no_aim":
+                new_projectile = get_fan_pattern_bullets(cnt1, cnt2, ang1, ang2, spe1, spe2, self.pos, 0)
                 
-
         return new_projectile
     
     #Utlity function
