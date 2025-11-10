@@ -12,8 +12,6 @@ pygame.display.set_caption("Pyhou")
 CLOCK = pygame.time.Clock()
 running = True
 
-Player.set_bound(WINDOW)
-Projectile.set_bound(WINDOW)
 player = Player(WINDOW.get_width()/2, WINDOW.get_height()/2)
 enemy = Enemy(WINDOW.get_width()/2, 40)
 player_input = {"left":False, "right":False, "up":False, "down":False, "slow":False, "shoot":False}
@@ -36,7 +34,7 @@ def check_enemy_collisions():
     for bullet in player.bullets[:]:
         if is_bullet_hit_enemy(bullet):
             bullet.is_remove = True
-            enemy.health -= 2
+            enemy.take_damage()
 
 def is_bullet_hit_enemy(bullet):
     distance = bullet.pos.distance_to(enemy.pos)
@@ -57,9 +55,12 @@ while running:
     if (player_input["shoot"]):
         player.shoot(player_input)
 
+
     player.update_pos(player_input)
     player.update_proj()
-    check_enemy_collisions() #careful bout placement
+    enemy.update_action(player.pos)
+    enemy.update_proj()
+    check_enemy_collisions()
     player.draw(WINDOW)
     enemy.draw(WINDOW)
     pygame.display.update()

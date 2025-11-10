@@ -1,20 +1,86 @@
 import pygame
+from math import atan2, radians, degrees
 from pygame.math import Vector2
+from .action import Action
+import json
+import os
+from .attack_pattern import *
 
 class Enemy:
     def __init__(self, pos_x, pos_y):
         self.pos = Vector2(pos_x, pos_y)
-
-        #self.w = 16
-        #self.h = 32
-
+        self.vel = Vector2(0, 0)
         self.r = 14
-
         self.health = 100.0
+        self.bullets = []
+
+        with open('Pyhou\\attacks\\test_attack.json', "r") as f:
+            self.actions_data = json.load(f) #Load aksi dari json
+
+        self.current_action = None
+        self.start_action("simple_fan")
+    
+    def take_damage(self):
+        if self.health > 0:
+            self.health -= 2
+        print(self.health)
+
+    def start_action(self, action_name):
+        if action_name in self.actions_data:
+            self.current_action = Action(self.actions_data[action_name])
+
+    def shoot(self, step, player_pos):
+        pattern_name = step.get("pattern")
+        valid_name = ["fan_aim"]
+        if pattern_name in valid_name:
+            new_projectiles = self.get_projectile(pattern_name, step, player_pos)
+        
+        self.bullets.extend(new_projectiles)
+
+    def get_projectile(self, pattern_name, step, player_pos):
+        new_projectile = []
+        cnt1 = step.get("cnt1")
+        cnt2 = step.get("cnt2")
+        ang1 = step.get("ang1")
+        ang2 = step.get("ang2")
+        spe1 = step.get("spe1")
+        spe2 = step.get("ang2")
+        player_angle_rad = atan2(-(player_pos.y - self.pos.y), player_pos.x - self.pos.x)
+        player_angle = degrees(player_angle_rad)
+
+        match pattern_name:
+            case "fan_aim":
+                new_projectile = get_fan_aim_pattern_bullets(cnt1, cnt2, ang1, ang2, spe1, spe2, self.pos, player_angle)
+                
+
+        return new_projectile
+    
+    #Utlity function
+    def update_action(self, player_pos):
+        if self.current_action:
+            self.current_action.update(self, player_pos)
+
+            if self.current_action.completed:
+                self.current_action = None
+    
+    # def update_pos(self):
+    #     self.pos += self.vel
+
+    def update_proj(self):
+        for bullet in self.bullets[:]:
+            bullet.update()
+            if bullet.is_out_bound():
+                bullet.is_remove = True
+
+            if bullet.is_remove:
+                self.bullets.remove(bullet)
 
     def draw(self, window):
         pygame.draw.circle(window, (0, 128, 128), (self.pos.x, self.pos.y), self.r)
         pygame.draw.circle(window, (0, 0, 0), (self.pos.x, self.pos.y), self.r, 1) 
+
+        for bullet in self.bullets:
+            bullet.draw(window)
      
             
 

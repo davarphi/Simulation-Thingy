@@ -1,16 +1,11 @@
 import pygame
 from pygame.math import Vector2
-from math import radians
+from math import radians, pi
 from .projectile import Projectile
 
 class Player:
-    bound_w = None
-    bound_h = None
-
-    @classmethod
-    def set_bound(cls, window):
-        cls.bound_w = window.get_width()
-        cls.bound_h = window.get_height()
+    bound_w = 576
+    bound_h = 672
     
     def __init__(self, pos_x, pos_y):
         self.BASE_SPEED = 5
@@ -42,7 +37,6 @@ class Player:
             self.pos.y = self.r
         elif (self.pos.y > self.bound_h - self.r): 
             self.pos.y = self.bound_h - self.r
-        #TODO: movement on window boujnd
     
     def draw(self, window):
         pygame.draw.circle(window, (128, 0, 0), (self.pos.x, self.pos.y), self.r)
@@ -54,9 +48,9 @@ class Player:
 
     def shoot(self, player_state):
         if (player_state["slow"]):
-            attack_degs = [-radians(2), 0, radians(2)]
+            attack_degs = [pi/2-radians(2), pi/2, pi/2+radians(2)]
         else:
-            attack_degs = [-radians(5), 0, radians(5)]
+            attack_degs = [pi/2-radians(4), pi/2, pi/2+radians(4)]
         
         if self.shot_cooldown == 0:
             for angle in attack_degs:
@@ -72,7 +66,7 @@ class Player:
             bullet.update()
             if bullet.is_out_bound():
                 bullet.is_remove = True
-                
+
             if bullet.is_remove:
                 self.bullets.remove(bullet)
 
