@@ -38,3 +38,5 @@ class Action:
                 enemy.shoot(step, player_pos)
             case "wait":
                 pass
+            case "move":
+                enemy.update_pos(step)

@@ -10,6 +10,7 @@ class Enemy:
     def __init__(self, pos_x, pos_y):
         self.pos = Vector2(pos_x, pos_y)
         self.vel = Vector2(0, 0)
+        self.speed = 0
         self.r = 14
         self.health = 100.0
         self.bullets = []
@@ -84,8 +85,10 @@ class Enemy:
             if self.current_action.completed:
                 self.current_action = None
     
-    # def update_pos(self):
-    #     self.pos += self.vel
+    def update_pos(self, step):
+        self.vel = Vector2(step.get("vel_x"), step.get("vel_y"))
+        self.speed = step.get("speed")
+        self.pos += self.vel*self.speed
 
     def update_proj(self):
         for bullet in self.bullets[:]:
