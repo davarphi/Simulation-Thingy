@@ -31,7 +31,9 @@ class Enemy:
 
     def shoot(self, step, player_pos):
         pattern_name = step.get("pattern")
-        valid_name = ["fan_aim", "fan_no_aim"]
+        valid_name = ["fan_aim", "fan_no_aim", "ring_hit_aim", \
+                      "ring_no_hit_aim", "ring_no_hit_aim", "ring_no_hit_no_aim", \
+                      "fan_random", "ring_random", "meek_random"]
         if pattern_name in valid_name:
             new_projectiles = self.get_projectile(pattern_name, step, player_pos)
         
@@ -53,6 +55,21 @@ class Enemy:
                 new_projectile = get_fan_pattern_bullets(cnt1, cnt2, ang1, ang2, spe1, spe2, self.pos, player_angle)
             case "fan_no_aim":
                 new_projectile = get_fan_pattern_bullets(cnt1, cnt2, ang1, ang2, spe1, spe2, self.pos, 0)
+            case "ring_hit_aim":
+                new_projectile = get_ring_hit_pattern_bullets(cnt1, cnt2, ang1, ang2, spe1, spe2, self.pos, player_angle)
+            case "ring_hit_no_aim":
+                new_projectile = get_ring_hit_pattern_bullets(cnt1, cnt2, ang1, ang2, spe1, spe2, self.pos, 0)
+            case "ring_no_hit_aim":
+                new_projectile = get_ring_no_hit_pattern_bullets(cnt1, cnt2, ang1, ang2, spe1, spe2, self.pos, player_angle)
+            case "ring_no_hit_no_aim":
+                new_projectile = get_ring_no_hit_pattern_bullets(cnt1, cnt2, ang1, ang2, spe1, spe2, self.pos, 0)
+            case "fan_random":
+                new_projectile = get_fan_random_pattern_bullets(cnt1, cnt2, ang1, ang2, spe1, spe2, self.pos)
+            case "ring_random":
+                new_projectile = get_ring_random_pattern_bullets(cnt1, cnt2, ang1, ang2, spe1, spe2, self.pos)
+            case "meek_random":
+                new_projectile = get_meek_random_pattern_bullets(cnt1, cnt2, ang1, ang2, spe1, spe2, self.pos)
+
                 
         return new_projectile
     
