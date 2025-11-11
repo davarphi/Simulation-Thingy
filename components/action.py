@@ -24,7 +24,6 @@ class Action:
         
         self.execute_step(enemy, step, player_pos)
         self.step_timer += 1
-        print(self.step_timer)
 
         if self.step_timer >= duration:
             print("Passes here")

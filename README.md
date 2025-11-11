@@ -1,5 +1,4 @@
-Simulation thingy for final project.
+Use uv sync to download the libs you need
+To run, just use uv run main.py
 
-The original need JDK & Processing to run. 
 
-The Python Edition need pygames, just run main.py after installing the libraries at requirements. 

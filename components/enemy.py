@@ -14,10 +14,13 @@ class Enemy:
         self.health = 100.0
         self.bullets = []
 
-        with open('Pyhou\\attacks\\test_attack.json', "r") as f:
+        #Ini diganti entar
+        with open('attacks\\test_attack.json', "r") as f:
             self.actions_data = json.load(f)
 
         self.current_action = None
+
+        #Ini juga
         self.start_action("test_stage")
     
     def take_damage(self):
