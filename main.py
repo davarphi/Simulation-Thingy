@@ -29,15 +29,21 @@ def check_input(key, value):
     elif key == pygame.K_z:
         player_input["shoot"] = value
 
+def check_player_collisions():
+    for bullet in enemy.bullets[:]:
+        if is_bullet_hit(bullet, player):
+            bullet.is_remove = True
+            print("You lose!")
+
 def check_enemy_collisions():
     for bullet in player.bullets[:]:
-        if is_bullet_hit_enemy(bullet):
+        if is_bullet_hit(bullet, enemy):
             bullet.is_remove = True
             enemy.take_damage()
 
-def is_bullet_hit_enemy(bullet):
-    distance = bullet.pos.distance_to(enemy.pos)
-    return (distance < bullet.r + enemy.r)
+def is_bullet_hit(bullet, object):
+    distance = bullet.pos.distance_to(object.pos)
+    return (distance < bullet.r + object.r)
 
 while running:
     WINDOW.fill((128, 128, 128))
@@ -60,6 +66,7 @@ while running:
     enemy.update_action(player.pos)
     enemy.update_proj()
     check_enemy_collisions()
+    check_player_collisions()
     player.draw(WINDOW)
     enemy.draw(WINDOW)
     pygame.display.update()

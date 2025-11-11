@@ -26,7 +26,6 @@ class Action:
         self.step_timer += 1
 
         if self.step_timer >= duration:
-            print("Passes here")
             self.step_timer = 0
             self.current_step += 1
 
@@ -40,3 +39,5 @@ class Action:
                 pass
             case "move":
                 enemy.update_pos(step)
+            case "teleport":
+                pass

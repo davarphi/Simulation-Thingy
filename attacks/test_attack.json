@@ -4,12 +4,16 @@
         "steps": [
             {"type": "move", "vel_x": -1, "vel_y": 0, "speed": 5, "duration": 30},
             {"type": "shoot", "pattern": "meek_random", "cnt1":10, "cnt2":3, "ang1": -90, "ang2": 20, "spe1": 4, "spe2": 2},
-            {"type": "wait", "duration": 120},
-            {"type": "move", "vel_x": 1, "vel_y": 0, "speed": 5, "duration": 30},
+            {"type": "wait", "duration": 60},
             {"type": "move", "vel_x": 1, "vel_y": 0, "speed": 5, "duration": 30},
             {"type": "shoot", "pattern": "meek_random", "cnt1":10, "cnt2":3, "ang1": -90, "ang2": 20, "spe1": 4, "spe2": 2},
-            {"type": "wait", "duration": 120},
-            {"type": "move", "vel_x": -1, "vel_y": 0, "speed": 5, "duration": 30}
+            {"type": "wait", "duration": 60},
+            {"type": "move", "vel_x": 1, "vel_y": 0, "speed": 5, "duration": 30},
+            {"type": "shoot", "pattern": "meek_random", "cnt1":10, "cnt2":3, "ang1": -90, "ang2": 20, "spe1": 4, "spe2": 2},
+            {"type": "wait", "duration": 60},
+            {"type": "move", "vel_x": -1, "vel_y": 0, "speed": 5, "duration": 30},
+            {"type": "shoot", "pattern": "meek_random", "cnt1":10, "cnt2":3, "ang1": -90, "ang2": 20, "spe1": 4, "spe2": 2},
+            {"type": "wait", "duration": 60}
         ]
     }
 }

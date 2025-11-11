@@ -17,7 +17,8 @@ class Player:
         self.r = 7
         self.bullets = []
         self.cooldown_time = 5
-        self.shot_cooldown = 0 
+        self.shot_cooldown = 0
+        self.is_hit = False
 
     def update_pos(self, player_input):
         self.vel.x = player_input["right"] - player_input["left"]
