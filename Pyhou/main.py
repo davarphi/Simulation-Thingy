@@ -1,8 +1,7 @@
 import pygame
-import pygame.math
 from components.player import Player
 from components.enemy import Enemy
-from components.projectile import Projectile
+import os
 
 pygame.init()
 

@@ -1,5 +1,5 @@
 {
-    "simple_fan": {
+    "test_stage": {
         "loop": true,
         "steps": [
             {"type": "shoot", "pattern": "meek_random", "cnt1":10, "cnt2":3, "ang1": -90, "ang2": 20, "spe1": 4, "spe2": 2},

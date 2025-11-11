@@ -1,7 +1,0 @@
-To do :
-shoot
-wait
-fan_aim
-
-Later (with priority):
-moveto (with duration?)
