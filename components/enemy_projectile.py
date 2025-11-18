@@ -11,13 +11,9 @@ class EnemyProjectile():
         self.start = Vector2(pos_x, pos_y)
         self.pos = Vector2(pos_x, pos_y)
         self.speed = speed
-        self.angle = angle #delete later
         self.vel = Vector2(cos(angle), -sin(angle))*self.speed
         self.r = 5
         self.is_remove = False
-
-    def __str__(self):
-        return f"{self.pos!r}, {self.speed}, {self.angle}"
     
     def update(self):
         self.pos += self.vel

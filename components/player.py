@@ -9,16 +9,16 @@ class Player:
     
     def __init__(self, pos_x, pos_y):
         self.BASE_SPEED = 5
+        self.DEFAULT_POS = Vector2(Player.bound_w/2 + Player.bound_h/2)
 
         self.pos = Vector2(pos_x, pos_y)
         self.vel = Vector2(0,0)
-        #self.w = 8
-        #self.h = 8
         self.r = 7
         self.bullets = []
-        self.cooldown_time = 5
+        self.cooldown_time = 10
         self.shot_cooldown = 0
-        self.is_hit = False
+
+        self.bullets_hit = 0
 
     def update_pos(self, player_input):
         self.vel.x = player_input["right"] - player_input["left"]

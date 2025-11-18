@@ -14,6 +14,7 @@ running = True
 player = Player(WINDOW.get_width()/2, WINDOW.get_height()/2)
 enemy = Enemy(WINDOW.get_width()/2, 40)
 player_input = {"left":False, "right":False, "up":False, "down":False, "slow":False, "shoot":False}
+is_player_touch_enemy = False
 
 def check_input(key, value):
     if key == pygame.K_LEFT:
@@ -33,7 +34,7 @@ def check_player_collisions():
     for bullet in enemy.bullets[:]:
         if is_bullet_hit(bullet, player):
             bullet.is_remove = True
-            print("You lose!")
+            player.bullets_hit += 1
 
 def check_enemy_collisions():
     for bullet in player.bullets[:]:
@@ -69,6 +70,23 @@ while running:
     check_player_collisions()
     player.draw(WINDOW)
     enemy.draw(WINDOW)
+    enemy_to_player_dist = enemy.pos.distance_to(player.pos)
+    if (enemy_to_player_dist < player.r + enemy.r):
+        is_player_touch_enemy = True
+        time_finish = pygame.time.get_ticks()
+        running = False
+    elif (enemy.health <= 0):
+        time_finish = pygame.time.get_ticks()
+        running = False
     pygame.display.update()
 
 pygame.quit()
+
+if is_player_touch_enemy:
+    print("Player hit the enemy!")
+print(f"Bullets hit : {player.bullets_hit}")
+print(f"Time finished: {time_finish/1000} s")
+if enemy.health > 0:
+    print(f"Enemy last health : {enemy.health}")
+else:
+    print("Enemy defeated!")
