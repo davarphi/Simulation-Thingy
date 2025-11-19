@@ -25,8 +25,9 @@ class Enemy:
         self.start_action("test_stage")
     
     def take_damage(self):
+        DAMAGE = 1
         if self.health > 0:
-            self.health -= 2
+            self.health -= DAMAGE
         print(self.health)
 
     def start_action(self, action_name):
